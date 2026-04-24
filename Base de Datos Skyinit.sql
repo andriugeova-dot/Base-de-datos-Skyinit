@@ -267,6 +267,35 @@ LOCK TABLES `favoritos` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `historialpropiedades`
+--
+
+DROP TABLE IF EXISTS `historialpropiedades`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `historialpropiedades` (
+  `HistorialID` int NOT NULL AUTO_INCREMENT,
+  `UsuarioID` int NOT NULL,
+  `PropiedadID` int NOT NULL,
+  `FechaAcceso` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`HistorialID`),
+  KEY `UsuarioID` (`UsuarioID`),
+  KEY `PropiedadID` (`PropiedadID`),
+  CONSTRAINT `historialpropiedades_ibfk_1` FOREIGN KEY (`UsuarioID`) REFERENCES `usuarios` (`UsuarioID`) ON DELETE CASCADE,
+  CONSTRAINT `historialpropiedades_ibfk_2` FOREIGN KEY (`PropiedadID`) REFERENCES `propiedades` (`PropiedadID`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `historialpropiedades`
+--
+
+LOCK TABLES `historialpropiedades` WRITE;
+/*!40000 ALTER TABLE `historialpropiedades` DISABLE KEYS */;
+/*!40000 ALTER TABLE `historialpropiedades` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `imagenespropiedad`
 --
 
@@ -499,6 +528,35 @@ INSERT INTO `roles` VALUES (1,'Administrador'),(2,'Agente'),(3,'Usuario');
 UNLOCK TABLES;
 
 --
+-- Table structure for table `sesiones`
+--
+
+DROP TABLE IF EXISTS `sesiones`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sesiones` (
+  `SesionID` int NOT NULL AUTO_INCREMENT,
+  `UsuarioID` int NOT NULL,
+  `FechaInicio` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `FechaFin` datetime DEFAULT NULL,
+  `Token` varchar(255) NOT NULL,
+  PRIMARY KEY (`SesionID`),
+  UNIQUE KEY `Token` (`Token`),
+  KEY `UsuarioID` (`UsuarioID`),
+  CONSTRAINT `sesiones_ibfk_1` FOREIGN KEY (`UsuarioID`) REFERENCES `usuarios` (`UsuarioID`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sesiones`
+--
+
+LOCK TABLES `sesiones` WRITE;
+/*!40000 ALTER TABLE `sesiones` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sesiones` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tiposoperacion`
 --
 
@@ -572,4 +630,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-04-23 17:21:49
+-- Dump completed on 2026-04-24 12:38:19
