@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `skyinit` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `skyinit`;
 -- MySQL dump 10.13  Distrib 8.0.45, for Win64 (x86_64)
 --
 -- Host: localhost    Database: skyinit
@@ -503,6 +505,39 @@ LOCK TABLES `mensajesconsulta` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `notificaciones`
+--
+
+DROP TABLE IF EXISTS `notificaciones`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `notificaciones` (
+  `NotificacionID` int NOT NULL AUTO_INCREMENT,
+  `UsuarioID` int NOT NULL,
+  `Titulo` varchar(150) NOT NULL,
+  `Mensaje` text NOT NULL,
+  `Leida` tinyint(1) NOT NULL DEFAULT '0',
+  `FechaCreacion` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `TipoNotificacion` varchar(50) NOT NULL,
+  `EntidadID` int DEFAULT NULL,
+  `EntidadTipo` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`NotificacionID`),
+  KEY `UsuarioID` (`UsuarioID`),
+  KEY `idx_leida` (`UsuarioID`,`Leida`),
+  CONSTRAINT `notificaciones_ibfk_1` FOREIGN KEY (`UsuarioID`) REFERENCES `usuarios` (`UsuarioID`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `notificaciones`
+--
+
+LOCK TABLES `notificaciones` WRITE;
+/*!40000 ALTER TABLE `notificaciones` DISABLE KEYS */;
+/*!40000 ALTER TABLE `notificaciones` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `passwordresettokens`
 --
 
@@ -845,4 +880,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-06-04 12:52:24
+-- Dump completed on 2026-06-04 13:54:31
