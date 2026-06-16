@@ -121,8 +121,12 @@ CREATE TABLE `constructoras` (
   `Contacto` varchar(100) DEFAULT NULL,
   `Telefono` varchar(20) DEFAULT NULL,
   `Correo` varchar(100) DEFAULT NULL,
+  `Estado` varchar(255) DEFAULT 'Activo',
+  `Logo` varchar(255) DEFAULT NULL,
+  `Descripcion` varchar(300) NOT NULL,
+  `Ciudad` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ConstructoraID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -131,7 +135,7 @@ CREATE TABLE `constructoras` (
 
 LOCK TABLES `constructoras` WRITE;
 /*!40000 ALTER TABLE `constructoras` DISABLE KEYS */;
-INSERT INTO `constructoras` VALUES (1,'Casa Feliz','Instagram','310703090','constructoraskyinit@gmail.com');
+INSERT INTO `constructoras` VALUES (1,'Casa Feliz','Instagram','310703090',NULL,'Activo',NULL,'',NULL),(2,'casa triste','faccebook','3115248965',NULL,'Inactivo',NULL,'Una constructora del futuro','Tunja '),(3,'casa contructora','Instagram','54478214','casacons@gmail.com','Activo',NULL,'',NULL),(6,'constructora Costa Rica','WhatsAPP','3124143860','ConstructoraCostaRica@gmail.com','Activo',NULL,'La mejor constructora del mundo ','Duitama');
 /*!40000 ALTER TABLE `constructoras` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -405,7 +409,7 @@ CREATE TABLE `imagenesconstructora` (
   PRIMARY KEY (`ImagenID`),
   KEY `ConstructoraID` (`ConstructoraID`),
   CONSTRAINT `imagenesconstructora_ibfk_1` FOREIGN KEY (`ConstructoraID`) REFERENCES `constructoras` (`ConstructoraID`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -414,6 +418,7 @@ CREATE TABLE `imagenesconstructora` (
 
 LOCK TABLES `imagenesconstructora` WRITE;
 /*!40000 ALTER TABLE `imagenesconstructora` DISABLE KEYS */;
+INSERT INTO `imagenesconstructora` VALUES (1,1,'constructora1.webp',1),(2,2,'constructora2.avif',1),(3,3,'constructora3.jpg',1),(6,6,'constructora4.webp',1);
 /*!40000 ALTER TABLE `imagenesconstructora` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -878,4 +883,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-06-04 13:54:31
+-- Dump completed on 2026-06-16 16:55:59
